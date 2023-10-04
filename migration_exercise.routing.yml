@@ -1,0 +1,6 @@
+migration_exercise.test_page:
+  path: "/test-page"
+  defaults:
+    _controller: Drupal\migration_exercise\Controller\TestController::testage
+  requirements:
+    _permission: 'access content'

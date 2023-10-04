@@ -1,0 +1,59 @@
+uuid: 3151523a-d17e-413b-89db-847870b4d634
+id: migration_exercise_import_city
+label: 'Migration exercise import city'
+dependencies:
+  enforced:
+    module:
+      - migration_exercise
+migration_tags:
+  - Migration Exercise
+migration_group: default
+source:
+  constants:
+    FIELD_remote_id: 'remote_id'
+    FIELD_title: 'title'
+    FIELD_city: 'city'
+    FIELD_loc_lat: 'loc_lat'
+    FIELD_loc_lon: 'loc_lon'
+    FIELD_pop: 'pop'
+    FIELD_state: 'state'
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  key: default
+
+  urls:
+    - modules/custom/migration_exercise/sources/cities.json
+  item_selector: /
+  fields:
+    - name: remote_id
+      label: 'remote_id'
+      selector: _id
+    - name: city
+      label: 'city'
+      selector: city
+    - name: loc_lat
+      label: 'loc_lat'
+      selector: loc/0
+    - name: loc_lon
+      label: 'loc_lon'
+      selector: loc/1
+    - name: pop
+      label: 'pop'
+      selector: pop
+    - name: state
+      label: 'state'
+      selector: state
+  ids:
+    remote_id:
+      type: string
+process:
+  remote_id: remote_id
+  title: title
+  city: city
+  loc_lat: loc_lat
+  loc_lon: loc_lon
+  pop: pop
+  state: state
+destination:
+  plugin: 'entity:city'
